@@ -2,16 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/telegram.js",
-      "use": "@vercel/node@2.8.2"
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/api/telegram",
-      "dest": "/api/telegram.js",
+      "src": "/api/webhook",
+      "dest": "/api/webhook.js",
       "methods": ["GET", "POST"]
     }
-  ]
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 }
 
