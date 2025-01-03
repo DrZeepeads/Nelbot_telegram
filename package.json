@@ -1,12 +1,20 @@
 {
   "name": "pediatric-book-bot",
   "version": "1.0.0",
-  "engines": {
-    "node": "18.x"
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "node api/webhook.js",
+    "dev": "nodemon api/webhook.js"
   },
   "dependencies": {
-    "telegraf": "^4.12.2",
-    "@supabase/supabase-js": "^2.21.0"
+    "telegraf": "^4.12.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
 
