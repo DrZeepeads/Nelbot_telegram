@@ -1,19 +1,12 @@
 {
   "name": "pediatric-book-bot",
   "version": "1.0.0",
-  "description": "A Telegram bot for pediatric book information",
-  "main": "bot.js",
-  "scripts": {
-    "start": "node bot.js"
+  "engines": {
+    "node": "18.x"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.21.0",
-    "dotenv": "^16.0.3",
-    "fuzzysort": "^2.0.4",
-    "telegraf": "^4.12.2"
-  },
-  "engines": {
-    "node": ">=14.x"
+    "telegraf": "^4.12.2",
+    "@supabase/supabase-js": "^2.21.0"
   }
 }
 
