@@ -9,6 +9,7 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY
 // Initialize Telegraf bot
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
 
+// Bot commands and logic
 bot.start((ctx) => {
   ctx.reply('Welcome to the Pediatric Book Bot! Type /help to see available commands.');
 });
@@ -101,9 +102,6 @@ async function sendBookInfo(ctx, book) {
   await ctx.replyWithMarkdown(message);
 }
 
-bot.launch();
-
-// Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'));
-process.once('SIGTERM', () => bot.stop('SIGTERM'));
+// Export the bot for use in the webhook handler
+module.exports = bot;
 
