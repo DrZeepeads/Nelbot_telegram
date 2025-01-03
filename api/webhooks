@@ -1,16 +1,38 @@
-const bot = require('../index');
+const { Telegraf } = require('telegraf');
 
-module.exports = async (req, res) => {
+// Initialize bot
+const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+
+// Basic commands
+bot.command('start', (ctx) => {
+  ctx.reply('Welcome to the Pediatric Book Bot! Use /help to see available commands.');
+});
+
+bot.command('help', (ctx) => {
+  ctx.reply('Available commands:\n/search <title> - Search for a book\n/random - Get a random book');
+});
+
+// Export the bot instance
+const handler = async (request, response) => {
   try {
-    if (req.method === 'POST') {
-      await bot.handleUpdate(req.body);
-      res.status(200).send('OK');
-    } else {
-      res.status(200).send('Webhook is working');
+    // Handle GET requests for webhook verification
+    if (request.method === 'GET') {
+      return response.status(200).json({ status: 'ok' });
     }
+
+    // Handle POST requests from Telegram
+    if (request.method === 'POST') {
+      await bot.handleUpdate(request.body);
+      return response.status(200).json({ status: 'ok' });
+    }
+
+    // Handle other methods
+    return response.status(405).json({ error: 'Method not allowed' });
   } catch (error) {
-    console.error('Error in webhook handler:', error);
-    res.status(500).send('Internal Server Error');
+    console.error('Webhook error:', error);
+    return response.status(500).json({ error: 'Internal server error' });
   }
 };
+
+module.exports = handler;
 
